@@ -561,3 +561,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 ```
 
 
+接口测试：
+
+![postman测试图](postman_test.jpeg)
