@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  context-path: /demo
+
+
+# JWT 认证配置
+jwt:
+  header: Authorization
+  secret: w-oasis123456
+  expiration: 604800 #token七天不过期
+  tokenHead: "Bearer "
+  exceptUrl: "/auth/**"
