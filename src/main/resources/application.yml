@@ -1,12 +1,11 @@
 server:
-  port: 8080
-  context-path: /demo
+  port: 8089
 
-
-# JWT 认证配置
+#登陆认证配置
 jwt:
-  header: Authorization
+  header: Authorization    #请求头部添加的标识名称，注意前后端一致
   secret: w-oasis123456
-  expiration: 604800 #token七天不过期
-  tokenHead: "Bearer "
-  exceptUrl: "/auth/**"
+  expiration: 604800       #token七天不过期
+  tokenHead: "Bearer "     #注意后面跟着一个空格，注意前后端一致
+  exceptUrl: "/auth/**"  #{注：这部分跟用户认证有关系，配置不要随便改动，本地修改不要提交}  不需要token认证即可访问的url配置，注意前后端一致[PS:其他不需要token即可访问的接口，mapping请按照 "/**/except/**" 这个规则写
+

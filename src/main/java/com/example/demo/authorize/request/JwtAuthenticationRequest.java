@@ -1,4 +1,4 @@
-package com.example.demo.TokenAuthorize.Authorize;
+package com.example.demo.authorize.request;
 
 import java.io.Serializable;
 
@@ -9,24 +9,24 @@ public class  JwtAuthenticationRequest implements Serializable {
 
     private static final long serialVersionUID = -8445943548965154778L;
 
-    private String username;
+    private String useraccount;//此处为手机号码
     private String password;
 
     public JwtAuthenticationRequest() {
         super();
     }
 
-    public JwtAuthenticationRequest(String username, String password) {
-        this.setUsername(username);
-        this.setPassword(password);
+    public JwtAuthenticationRequest(String useraccount, String password) {
+        this.useraccount = useraccount;
+        this.password = password;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getUseraccount() {
+        return useraccount;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUseraccount(String useraccount) {
+        this.useraccount = useraccount;
     }
 
     public String getPassword() {

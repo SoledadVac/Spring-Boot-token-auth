@@ -1,6 +1,6 @@
-package com.example.demo.TokenAuthorize.Authorize;
+package com.example.demo.authorize.user;
 
-import com.example.demo.TokenAuthorize.User.User;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -22,13 +22,18 @@ public final class JwtUserFactory {
     public static JwtUser create(User user) {
         return new JwtUser(
                 user.getUserId(),
+                user.getUserName(),
                 user.getAccount(),//account是唯一的
                 user.getPwd(),
+                user.getStatus(),
                 mapToGrantedAuthorities(user.getRoles())
         );
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(List<String> authorities) {
+        if(authorities==null || authorities.size()==0){
+            return null;
+        }
         return authorities.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());

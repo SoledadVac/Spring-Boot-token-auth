@@ -1,12 +1,19 @@
-package com.example.demo.TokenAuthorize.Authorize;
+package com.example.demo.authorize.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.woasis.esbp.battery.admin.authorize.reponse.AuthorizeTokenReponse;
+import com.woasis.esbp.battery.admin.authorize.user.JwtUser;
+import com.woasis.esbp.battery.admin.authorize.user.User;
+import com.woasis.esbp.battery.admin.authorize.util.AuthorizeResultEnum;
+import com.woasis.esbp.battery.admin.authorize.util.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +27,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
+
 
     private AuthenticationManager authenticationManager;
     private UserDetailsService userDetailsService;
@@ -40,21 +50,32 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * 登陆
-     * @param username
+     * @param useraccount
      * @param password
      * @return
      */
     @Override
-    public String login(String username, String password) {
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
+    public AuthorizeTokenReponse login(String useraccount, String password) {
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(useraccount, password);
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-security so we can generate token
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+         JwtUser userDetails = (JwtUser)userDetailsService.loadUserByUsername(useraccount);
+        if(logger.isDebugEnabled()){
+            logger.debug("AuthServiceImpl_login [/auth/login] 用户登陆，根据用户名查询到用户:"+ JSONObject.toJSONString(userDetails));
+        }
+        User user=new User();
+        user.setUserId(userDetails.getId());
+        user.setUserName(userDetails.getUsername());
+        user.setAccount(userDetails.getMobile());
         final String token = jwtUtil.generateToken(userDetails);
-        return token;
+        AuthorizeResultEnum authorizeResultEnum= AuthorizeResultEnum.LOGIN_IN_SUCCEED;
+        AuthorizeTokenReponse authorizeTokenReponse=new AuthorizeTokenReponse(token,user);
+        authorizeTokenReponse.setErrorcode(authorizeResultEnum.getCode());
+        authorizeTokenReponse.setErrorinfo(authorizeResultEnum.getMsg());
+        return authorizeTokenReponse;
     }
 
     /**

@@ -1,30 +1,32 @@
-package com.example.demo.TokenAuthorize.Authorize;
+package com.example.demo.authorize.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * \* Created: liuhuichao
  * \* Date: 2017/10/30
  * \* Time: 上午10:32
- * \* Description: 为了安全服务的User
+ * \* Description: 为了安全服务的User，实现spring security的类
  * \
  */
 public class JwtUser  implements UserDetails {
 
     private final Long id;
     private final String username; //设置为account
+    private final String mobile;//手机号
     private final String password;
+    private final int status;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public JwtUser(Long id, String username, String password,  Collection<? extends GrantedAuthority> authorities) {
+    public JwtUser(Long id, String username, String mobile,String password, int status, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
+        this.mobile=mobile;
         this.password = password;
+        this.status=status;
         this.authorities = authorities;
     }
 
@@ -47,8 +49,17 @@ public class JwtUser  implements UserDetails {
         return this.username;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
     /**
      * 账户是否未过期
+
      * @return
      */
     @Override
@@ -62,6 +73,9 @@ public class JwtUser  implements UserDetails {
      */
     @Override
     public boolean isAccountNonLocked() {
+        if(this.status==0){//锁定
+            return false;
+        }
         return true;
     }
 

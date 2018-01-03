@@ -1,22 +1,23 @@
-package com.example.demo.TokenAuthorize.User;
+package com.example.demo.authorize.user;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
  * \* Created: liuhuichao
  * \* Date: 2017/10/27
  * \* Time: 下午3:14
- * \* Description:
+ * \* Description: 对应系统的模型
  * \
  */
 public class User implements Serializable {
 
 
+    private Long userId;//用户id
+    private String userName;//用户名
     private String account;//一般为手机号
     private String pwd;//账号密码
-    private Long userId;//用户id
+    private int status;//状态 0表示被禁用；1表示启用
     private List<String> roles;//角色
 
 
@@ -44,7 +45,13 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public List<String> getRoles() {
         return roles;
@@ -52,6 +59,14 @@ public class User implements Serializable {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
 

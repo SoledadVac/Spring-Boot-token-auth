@@ -1,4 +1,6 @@
-package com.example.demo.TokenAuthorize.Authorize;
+package com.example.demo.authorize.service;
+
+import com.woasis.esbp.battery.admin.authorize.reponse.AuthorizeTokenReponse;
 
 /**
  * \* Created: liuhuichao
@@ -14,7 +16,7 @@ public interface AuthService {
      * @param password
      * @return
      */
-    String login(String username, String password);
+    AuthorizeTokenReponse login(String username, String password);
 
     /**
      * 刷新 token

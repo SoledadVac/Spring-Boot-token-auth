@@ -1,11 +1,10 @@
-package com.example.demo.TokenAuthorize.Authorize;
+package com.example.demo.authorize.util;
 
-import com.example.demo.TokenAuthorize.Authorize.JwtUser;
+import com.woasis.esbp.battery.admin.authorize.user.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -124,9 +123,9 @@ public class JwtUtil {
      * @param userDetails
      * @return
      */
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(JwtUser userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USER_ACCOUNT, userDetails.getUsername());
+        claims.put(CLAIM_KEY_USER_ACCOUNT, userDetails.getMobile());
         claims.put(CLAIM_KEY_CREATED, new Date());
         return generateToken(claims);
     }
@@ -172,12 +171,11 @@ public class JwtUtil {
      * @param userDetails
      * @return
      */
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        JwtUser user = (JwtUser) userDetails;
+    public Boolean validateToken(String token, JwtUser userDetails) {
         final String useraccount = getUserAccountFromToken(token);
         final Date created = getCreatedDateFromToken(token);
         Boolean result= (
-                useraccount.equals(user.getUsername())
+                useraccount.equals(userDetails.getMobile())
                         && !isTokenExpired(token)
         );
         return result;
