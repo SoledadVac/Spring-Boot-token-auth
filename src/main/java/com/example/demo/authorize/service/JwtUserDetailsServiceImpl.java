@@ -1,11 +1,11 @@
 package com.example.demo.authorize.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.woasis.esbp.battery.admin.author.remote.SysAuthRemote;
-import com.woasis.esbp.battery.admin.authorize.reponse.AuthorLoginReponse;
-import com.woasis.esbp.battery.admin.authorize.user.JwtUser;
-import com.woasis.esbp.battery.admin.authorize.user.JwtUserFactory;
-import com.woasis.esbp.battery.admin.authorize.user.User;
+
+import com.example.demo.authorize.reponse.AuthorLoginReponse;
+import com.example.demo.authorize.user.JwtUser;
+import com.example.demo.authorize.user.JwtUserFactory;
+import com.example.demo.authorize.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUserDetailsServiceImpl.class);
 
-    @Autowired
-    private SysAuthRemote sysAuthRemote;
+   /* @Autowired
+    private SysAuthRemote sysAuthRemote;*/
     /**
      * 提供一种从用户名可以查到用户并返回的方法【本系统使用手机号account进行唯一用户验证】
      * @param account
@@ -36,7 +36,8 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     @Override
     public JwtUser loadUserByUsername(String account) throws UsernameNotFoundException {
         logger.debug("JwtUserDetailsServiceImpl_loadUserByUsername  查询用户，account="+account);
-        String loginResult=sysAuthRemote.login(account);
+        //String loginResult=sysAuthRemote.login(account);
+        String loginResult="";
         logger.debug("JwtUserDetailsServiceImpl_loadUserByUsername  查询用户，接口返回数据="+loginResult);
         AuthorLoginReponse loginReponse= JSONObject.parseObject(loginResult,AuthorLoginReponse.class);
         User user =loginReponse.getData();

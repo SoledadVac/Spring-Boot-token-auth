@@ -1,6 +1,6 @@
 package com.example.demo.authorize.util;
 
-import com.woasis.esbp.battery.admin.authorize.user.JwtUser;
+import com.example.demo.authorize.user.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

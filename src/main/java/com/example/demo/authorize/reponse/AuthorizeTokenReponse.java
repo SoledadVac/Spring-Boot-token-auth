@@ -1,6 +1,6 @@
 package com.example.demo.authorize.reponse;
 
-import com.woasis.esbp.battery.admin.authorize.user.User;
+import com.example.demo.authorize.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

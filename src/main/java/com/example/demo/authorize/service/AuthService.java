@@ -1,6 +1,7 @@
 package com.example.demo.authorize.service;
 
-import com.woasis.esbp.battery.admin.authorize.reponse.AuthorizeTokenReponse;
+
+import com.example.demo.authorize.reponse.AuthorizeTokenReponse;
 
 /**
  * \* Created: liuhuichao

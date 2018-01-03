@@ -1,7 +1,8 @@
 package com.example.demo.authorize.filter;
 
-import com.woasis.esbp.battery.admin.authorize.user.JwtUser;
-import com.woasis.esbp.battery.admin.authorize.util.JwtUtil;
+
+import com.example.demo.authorize.user.JwtUser;
+import com.example.demo.authorize.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

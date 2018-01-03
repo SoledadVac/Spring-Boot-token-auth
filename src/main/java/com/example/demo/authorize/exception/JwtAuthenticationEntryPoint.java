@@ -1,8 +1,9 @@
 package com.example.demo.authorize.exception;
 
 import com.alibaba.fastjson.JSONObject;
-import com.woasis.esbp.battery.admin.authorize.reponse.AuthorizeReponse;
-import com.woasis.esbp.battery.admin.authorize.util.AuthorizeResultEnum;
+
+import com.example.demo.authorize.reponse.AuthorizeReponse;
+import com.example.demo.authorize.util.AuthorizeResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;

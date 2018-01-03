@@ -1,11 +1,12 @@
 package com.example.demo.authorize.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.woasis.esbp.battery.admin.authorize.reponse.AuthorizeReponse;
-import com.woasis.esbp.battery.admin.authorize.reponse.AuthorizeTokenReponse;
-import com.woasis.esbp.battery.admin.authorize.request.JwtAuthenticationRequest;
-import com.woasis.esbp.battery.admin.authorize.service.AuthService;
-import com.woasis.esbp.battery.admin.authorize.util.AuthorizeResultEnum;
+
+import com.example.demo.authorize.reponse.AuthorizeReponse;
+import com.example.demo.authorize.reponse.AuthorizeTokenReponse;
+import com.example.demo.authorize.request.JwtAuthenticationRequest;
+import com.example.demo.authorize.service.AuthService;
+import com.example.demo.authorize.util.AuthorizeResultEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
