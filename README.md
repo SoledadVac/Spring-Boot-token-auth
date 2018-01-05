@@ -1,4 +1,4 @@
-> 本项目是为了探索spring boot best parctise的demo项目
+> 本项目基于spring cloud+json web token(JWT)+Spring security进行的token认证项目
 # 一，authorize-token验证
 使用spring security+jwt实现token的校验。
 
