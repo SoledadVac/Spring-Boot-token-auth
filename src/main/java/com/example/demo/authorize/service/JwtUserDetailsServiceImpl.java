@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * \* Created: liuhuichao
  * \* Date: 2017/10/30
@@ -37,10 +40,22 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     public JwtUser loadUserByUsername(String account) throws UsernameNotFoundException {
         logger.debug("JwtUserDetailsServiceImpl_loadUserByUsername  查询用户，account="+account);
         //String loginResult=sysAuthRemote.login(account);
-        String loginResult="";
-        logger.debug("JwtUserDetailsServiceImpl_loadUserByUsername  查询用户，接口返回数据="+loginResult);
-        AuthorLoginReponse loginReponse= JSONObject.parseObject(loginResult,AuthorLoginReponse.class);
-        User user =loginReponse.getData();
+        //String loginResult="";
+        //logger.debug("JwtUserDetailsServiceImpl_loadUserByUsername  查询用户，接口返回数据="+loginResult);
+        //AuthorLoginReponse loginReponse= JSONObject.parseObject(loginResult,AuthorLoginReponse.class);
+        //User user =loginReponse.getData();
+
+        /**模拟根据用户表示查询用户的过程**/
+        User user =new User();
+        user.setUserId(1l);
+        user.setUserName("pbc");
+        user.setPwd("$2a$10$0aTuTVxSw1kKW/qRwOip/ObfnZLd7PcjkEUELiCEEqE.kvvrOQFeu");//明文为：
+        user.setAccount("110");//手机号
+        List<String> roles=new ArrayList<>();
+       // roles.add("admin");//添加admin角色
+        roles.add("guest");//添加guest角色
+        user.setStatus(1);
+        user.setRoles(roles);
         return JwtUserFactory.create(user);
     }
 }
